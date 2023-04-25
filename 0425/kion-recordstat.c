@@ -2,38 +2,38 @@
 #include<stdlib.h> 
  
 /*配列で渡された気温の平均値を求めて返す*/ 
-double kionheikin(double array[],int size); 
+double kion_heikin(double array[],int size); 
 
 /*配列で渡された気温の最大値を求めて返す*/ 
-double kionmax(double array[],int size); 
+double kion_max(double array[],int size); 
 
 /*配列で渡された気温の最小値を求めて返す*/ 
-double kionmin(double array[],int size); 
+double kion_min(double array[],int size); 
 
 
-structkisyou{/*気温データを管理するレコード*/ 
+struct kisyou{/*気温データを管理するレコード*/ 
 int month; 
 int day; 
 int hour; 
 double kion; 
 };
 /*ファイルの内容を構造体の配列に記録しデータ数を返す*/
-int readfile(char filename[],struct kisyouarray[],int amax);
+int readfile(char filename[],struct kisyou array[],int amax);
 
-#define MAXFILENAME100 /*ファイル名の最大長*/
+#define MAXFILENAME 100 /*ファイル名の最大長*/
 
 /*１年間のデータを読み込めるように*/
-#define ARRAYSIZE10000
-#define DAYARRAY24
+#define ARRAYSIZE 10000
+#define DAYARRAY 24
 
 int main(void)
 {
     char filename[MAXFILENAME];
-    struct kisyoukisyoudata[ARRAYSIZE];/*構造体の配列を追加*/
+    struct kisyou kisyoudata[ARRAYSIZE];/*構造体の配列を追加*/
     double kion[DAYARRAY];
     int size;/*配列に読み込まれたデータ数*/
     int month,day;
-    
+
     /*追加：必要に応じて変数を定義*/
     
     fprintf(stderr,"データファイル名：");
