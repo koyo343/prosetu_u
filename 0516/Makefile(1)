@@ -1,0 +1,14 @@
+kion-htmlreport: kion-htmlreport.o readfile.o html-report.o kionstat.o
+	cc -o kion-htmlreport kion-htmlreport.o readfile.o html-report.o kionstat.o
+
+kion-htmlreport.o: kion-htmlreport.c kion-htmlreport.h
+	cc -c kion-htmlreport.c
+
+readfile.o: readfile.c kion-htmlreport.h
+	cc -c readfile.c
+
+html-report.o: html-report.c kion-htmlreport.h kionstat.h
+	cc -c html-report.c
+
+kionstat.o: kionstat.c kionstat.h
+	cc -c kionstat.c

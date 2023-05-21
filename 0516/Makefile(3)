@@ -1,0 +1,25 @@
+all: kion-htmlreport kion-htmlreport2
+
+kion-htmlreport: kion-htmlreport.o readfile.o html-report.o kionstat.o
+	cc -o kion-htmlreport kion-htmlreport.o readfile.o html-report.o kionstat.o
+
+kion-htmlreport2: kion-htmlreport.o readfile.o html-report2.o kionstat.o
+	cc -o kion-htmlreport2 kion-htmlreport.o readfile.o html-report2.o kionstat.o
+
+kion-htmlreport.o: kion-htmlreport.c kion-htmlreport.h
+	cc -c kion-htmlreport.c
+
+readfile.o: readfile.c kion-htmlreport.h
+	cc -c readfile.c
+
+html-report.o: html-report.c kion-htmlreport.h kionstat.h
+	cc -c html-report.c
+
+html-report2.o: html-report2.c kion-htmlreport.h kionstat.h
+	cc -c html-report2.c
+
+kionstat.o: kionstat.c kionstat.h
+	cc -c kionstat.c
+
+clean:
+	rm -f kion-htmlreport kion-htmlreport2 *.o a.out *~

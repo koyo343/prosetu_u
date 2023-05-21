@@ -1,53 +1,46 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* 配列で渡された気温の平均値を求めて返す */
-double kion_heikin(double array[], int size)
-{
-    int i ;
-    double sum = 0.0 ;
-
-    for (i = 0; i < size; i++) {
-	sum += array[i] ;
-    }
-
-    return sum/size ;
-}
-
-/* 配列で渡された気温の最大値を求めて返す */
-double kion_max(double array[], int size)
-{
-    int i ;
-    double vmax = array[0] ; /* 最大値の候補 */
-
-    for (i = 1; i < size; i++) {
-	if (array[i] > vmax) /* 最大値の候補よりも大きい値 */
-	    vmax = array[i] ; /* その値で最大値の候補を更新する */
-    }
-
-    return vmax ;
-}
-
-/* 配列で渡された気温の最小値を求めて返す */
-double kion_min(double array[], int size)
-{
-    int i ;
-    double vmin = array[0] ;
-
-    for (i = 1; i < size; i++) {
-	if (array[i] < vmin)
-	    vmin = array[i] ;
-    }
-
-    return vmin ;
-}
-
 struct kisyou { /* 気温データを管理するレコード */
     int month ;
     int day ;
     int hour ;
     double kion ;
 } ;
+
+/* ファイルの内容を構造体の配列に記録しデータ数を返す */
+int readfile(char filename[], struct kisyou array[], int amax) ;
+/* HTMLによる気温表の出力 */
+void html_report(struct kisyou array[], int size) ;
+/* 配列で渡された気温の平均値を求めて返す */
+double kion_heikin(double array[], int size) ;
+/* 配列で渡された気温の最大値を求めて返す */
+double kion_max(double array[], int size) ;
+/* 配列で渡された気温の最小値を求めて返す */
+double kion_min(double array[], int size) ;
+
+#define	MAXFILENAME 100 /* ファイル名の最大長 */
+
+/* １年間のデータを読み込めるように */
+#define ARRAYSIZE 10000
+
+int main(void)
+{
+    char filename[MAXFILENAME] ;
+    struct kisyou kisyoudata[ARRAYSIZE] ; /* 構造体の配列を追加 */
+    int size ; /* 配列に読み込まれたデータ数 */
+
+    fprintf(stderr, "データファイル名：") ;
+    scanf("%s", filename) ; /* 端末からファイル名を入力 */
+
+    /* データファイルの読み込み */
+    size = readfile(filename, kisyoudata, ARRAYSIZE) ;
+
+    /* 統計データのHTML整形出力 */
+    html_report(kisyoudata, size) ;
+ 
+    return 0 ;
+}
 
 /* ファイルの内容を構造体の配列に記録しデータ数を返す */
 int readfile(char filename[], struct kisyou array[], int amax)
@@ -123,25 +116,44 @@ void html_report(struct kisyou array[], int size)
     printf("</HTML>\n") ; /* HTMLの終端 */
 }
 
-#define	MAXFILENAME 100 /* ファイル名の最大長 */
-
-/* １年間のデータを読み込めるように */
-#define ARRAYSIZE 10000
-
-int main(void)
+/* 配列で渡された気温の平均値を求めて返す */
+double kion_heikin(double array[], int size)
 {
-    char filename[MAXFILENAME] ;
-    struct kisyou kisyoudata[ARRAYSIZE] ; /* 構造体の配列を追加 */
-    int size ; /* 配列に読み込まれたデータ数 */
+    int i ;
+    double sum = 0.0 ;
 
-    fprintf(stderr, "データファイル名：") ;
-    scanf("%s", filename) ; /* 端末からファイル名を入力 */
+    for (i = 0; i < size; i++) {
+	sum += array[i] ;
+    }
 
-    /* データファイルの読み込み */
-    size = readfile(filename, kisyoudata, ARRAYSIZE) ;
-
-    /* 統計データのHTML整形出力 */
-    html_report(kisyoudata, size) ;
- 
-    return 0 ;
+    return sum/size ;
 }
+
+/* 配列で渡された気温の最大値を求めて返す */
+double kion_max(double array[], int size)
+{
+    int i ;
+    double vmax = array[0] ; /* 最大値の候補 */
+
+    for (i = 1; i < size; i++) {
+	if (array[i] > vmax) /* 最大値の候補よりも大きい値 */
+	    vmax = array[i] ; /* その値で最大値の候補を更新する */
+    }
+
+    return vmax ;
+}
+
+/* 配列で渡された気温の最小値を求めて返す */
+double kion_min(double array[], int size)
+{
+    int i ;
+    double vmin = array[0] ;
+
+    for (i = 1; i < size; i++) {
+	if (array[i] < vmin)
+	    vmin = array[i] ;
+    }
+
+    return vmin ;
+}
+
