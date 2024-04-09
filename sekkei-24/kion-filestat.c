@@ -67,7 +67,13 @@ int main(void)
     int size;
     int i;
 
-    if ((fp = fopen("kion-20180401.csv", "r")) == NULL)
+    /*if ((fp = fopen("kion-20180401.csv", "r")) == NULL)
+    {
+        fprintf(stderr, "Error: File Open\n");
+        exit(1);
+    }*/
+
+    if ((fp = fopen("data/kion_data/kion-20180401.csv", "r")) == NULL)
     {
         fprintf(stderr, "Error: File Open\n");
         exit(1);

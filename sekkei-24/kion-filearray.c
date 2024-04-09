@@ -13,10 +13,16 @@ int main(void)
     int size ; /* 配列の添字、配列に読み込まれたデータ数として利用 */
     int i ;
 
-    /* ここからはファイルの入力処理 */
+    /* ここからはファイルの入力処理 
     if ((fp = fopen("kion-20180401.csv", "r")) == NULL) {
 	fprintf(stderr, "Error: File Open\n") ;
 	exit(1) ;
+    } */
+
+    if ((fp = fopen("data/kion_data/kion-20180401.csv", "r")) == NULL)
+    {
+        fprintf(stderr, "Error: File Open\n");
+        exit(1);
     }
 
     size = 0 ; /* 読み込んだデータの格納位置を初期化 */
