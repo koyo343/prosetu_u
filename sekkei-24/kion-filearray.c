@@ -29,15 +29,15 @@ int main(void)
     /* ファイルの最後 EOF(End of File) までの読み込み */
     while (fscanf(fp, "%d,%d,%d,%lf", &month, &day, &hour, &data) != EOF) {
 	/* month, day, hourは読み取ったが今回は使用しない */
-	kion[size] = data ; /* 読み込んだデータは配列のはじめから順に格納 */
-	size++;
+	    kion[size] = data ; /* 読み込んだデータは配列のはじめから順に格納 */
+	    size++;
     }
 
     fclose(fp) ;
 
     /* ここからは配列に読み込まれたデータの処理 */
     for (i = 0; i < size; i++) {
-	printf("kion[%d]: %.1f\n", i, kion[i]) ;
+	    printf("kion[%d]: %.1f\n", i, kion[i]) ;
     }
 
     return 0 ;

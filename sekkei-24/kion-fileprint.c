@@ -22,7 +22,7 @@ int main(void)
 
     /* ファイルの最後 EOF(End of File) までの読み込み */
     while (fscanf(fp, "%d,%d,%d,%lf", &month, &day, &hour, &data) != EOF) {
-	printf("%d月%d日%d時 %.1f\n", month, day, hour, data) ;
+	    printf("%d月%d日%d時 %.1f\n", month, day, hour, data) ;
     }
 
     /* ファイルのクローズ */
